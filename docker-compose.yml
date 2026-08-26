@@ -1,0 +1,9 @@
+services:
+  moogle-drive:
+    build: .
+    container_name: moogle_drive_ctf
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1

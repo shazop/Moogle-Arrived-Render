@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in - Moogle Accounts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f0f4f9;
+      color: #1f1f1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    .login-wrapper {
+      margin: auto 0;
+      width: 100%;
+      max-width: 448px;
+      background: #ffffff;
+      border: 1px solid #c7c7c7;
+      border-radius: 28px;
+      padding: 40px 36px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .moogle-logo {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+    }
+    .moogle-logo .m { color: #4285F4; }
+    .moogle-logo .o1 { color: #EA4335; }
+    .moogle-logo .o2 { color: #FBBC05; }
+    .moogle-logo .g { color: #4285F4; }
+    .moogle-logo .l { color: #34A853; }
+    .moogle-logo .e { color: #EA4335; }
+
+    .drive-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8f0fe;
+      color: #1967d2;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+    .title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #1f1f1f;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 15px;
+      color: #444746;
+      margin-bottom: 28px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .form-input {
+      width: 100%;
+      padding: 15px 16px;
+      font-size: 15px;
+      border: 1px solid #747775;
+      border-radius: 4px;
+      outline: none;
+      transition: all 0.2s;
+      background: transparent;
+    }
+    .form-input:focus {
+      border-color: #0b57d0;
+      box-shadow: 0 0 0 1px #0b57d0;
+    }
+    .form-label {
+      position: absolute;
+      left: 12px;
+      top: -9px;
+      background: #ffffff;
+      padding: 0 4px;
+      font-size: 12px;
+      color: #444746;
+    }
+    .error-box {
+      background: #fce8e6;
+      border: 1px solid #ea4335;
+      color: #c5221f;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 28px;
+    }
+    .btn-text {
+      background: none;
+      border: none;
+      color: #0b57d0;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 20px;
+      text-decoration: none;
+    }
+    .btn-text:hover {
+      background: #f0f4f9;
+    }
+    .btn-primary {
+      background: #0b57d0;
+      color: #ffffff;
+      border: none;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover {
+      background: #0842a0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .footer {
+      width: 100%;
+      max-width: 448px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #444746;
+      padding: 12px 8px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+    .footer-links a {
+      color: #444746;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: #1f1f1f;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <div class="logo-container">
+      <span class="moogle-logo">
+        <span class="m">M</span><span class="o1">o</span><span class="o2">o</span><span class="g">g</span><span class="l">l</span><span class="e">e</span>
+      </span>
+      <span class="drive-badge">
+        <svg width="14" height="14" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+          <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+          <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+          <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+          <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+          <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+          <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+        </svg>
+        Drive
+      </span>
+    </div>
+
+    <h1 class="title">Sign in</h1>
+    <p class="subtitle">to continue to Moogle Drive</p>
+
+    {% if error %}
+    <div class="error-box">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/login" id="loginForm">
+      <div class="form-group">
+        <label class="form-label" for="email">Email address</label>
+        <input type="email" id="email" name="email" class="form-input" placeholder="you@moogle.com" required autofocus>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required>
+      </div>
+
+      <div class="btn-row">
+        <a href="/signup" class="btn-text">Create account</a>
+        <button type="submit" class="btn-primary" id="submitBtn">Sign in</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="footer">
+    <span>English (United States)</span>
+    <div class="footer-links">
+      <a href="#">Help</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+
+</body>
+</html>

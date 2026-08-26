@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Console - Moogle Cloud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/moogle-drive.css') }}">
+  <style>
+    .admin-container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .admin-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .admin-title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .admin-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 500;
+      color: #1f1f1f;
+    }
+    .admin-badge {
+      background: #e6f4ea;
+      color: #137333;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+    .flag-card {
+      background: #1e1e1e;
+      color: #34d399;
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+      border: 1px solid #333333;
+    }
+    .flag-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #9ca3af;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .flag-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      color: #10b981;
+      word-break: break-all;
+    }
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-box {
+      background: #f8fafd;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+    .stat-val { font-size: 18px; font-weight: 700; color: #1f1f1f; }
+  </style>
+</head>
+<body class="drive-body">
+
+  <header class="drive-header">
+    <div class="header-left">
+      <a href="/drive" class="drive-logo">
+        <svg width="36" height="36" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+          <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+          <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+          <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+          <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+          <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+          <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+        </svg>
+        <span class="logo-name">Moogle Admin</span>
+      </a>
+    </div>
+
+    <div class="header-right">
+      <a href="/drive" class="btn-card-action" style="padding: 6px 14px; text-decoration: none;">
+        ← Back to Drive
+      </a>
+      <a href="/logout" class="btn-card-action danger" style="padding: 6px 14px; text-decoration: none; margin-left: 8px;">
+        Sign out
+      </a>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <div class="admin-card">
+      <div class="admin-header">
+        <div class="admin-title-row">
+          <h1 class="admin-title">Moogle Internal Administration Console</h1>
+          <span class="admin-badge">Authenticated: {{ user.email }} (Role: {{ user.role }})</span>
+        </div>
+      </div>
+
+      <div class="flag-card">
+        <div class="flag-label">🚩 Flag Captured</div>
+        <div class="flag-value">{{ flag }}</div>
+      </div>
+
+      <div class="admin-grid">
+        <div class="stat-box">
+          <div class="stat-label">Security Protocol</div>
+          <div class="stat-val">RSA-2048 / HS256</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Cluster Status</div>
+          <div class="stat-val">Operational</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Region</div>
+          <div class="stat-val">us-central-moogle-01</div>
+        </div>
+      </div>
+
+      <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.6;">
+        Congratulations on chaining the SSRF octal IP filter bypass, extracting the RSA Public Key from the internal <code>/keys.json</code> service, and performing the JWT algorithm confusion attack!
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

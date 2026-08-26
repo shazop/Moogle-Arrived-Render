@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Drive - Moogle Drive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/moogle-drive.css') }}">
+</head>
+<body class="drive-body">
+
+  <header class="drive-header">
+    <div class="header-left">
+      <a href="/drive" class="drive-logo">
+        <svg width="36" height="36" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+          <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+          <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+          <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+          <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+          <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+          <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+        </svg>
+        <span class="logo-name">Moogle Drive</span>
+      </a>
+    </div>
+
+    <div class="header-center">
+      <div class="search-container">
+        <span class="search-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#5f6368"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </span>
+        <input type="text" id="driveSearchInput" placeholder="Search in Drive" oninput="filterFiles(this.value)">
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="user-menu-container">
+        <div class="user-avatar-btn" style="background: {{ user.color }}" onclick="toggleUserMenu()" title="{{ user.email }}">
+          {{ user.avatar }}
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="ud-header">
+            <div class="ud-avatar" style="background: {{ user.color }}">{{ user.avatar }}</div>
+            <div class="ud-name">{{ user.name }}</div>
+            <div class="ud-email">{{ user.email }}</div>
+          </div>
+          <div class="ud-divider"></div>
+          <a href="/admin" class="ud-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1a73e8"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            Admin Console
+          </a>
+          <a href="/logout" class="ud-logout">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#c5221f"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            Sign out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="drive-app-container">
+
+    <aside class="drive-sidebar">
+      
+      <div class="sidebar-actions">
+        <button class="btn-new" onclick="triggerFileUpload()">
+          <svg width="22" height="22" viewBox="0 0 24 24">
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#1a73e8"/>
+          </svg>
+          <span>New file upload</span>
+        </button>
+      </div>
+
+      <input type="file" id="realFileInput" style="display:none" onchange="handleFileSelected(event)">
+
+      <nav class="sidebar-nav" style="margin-top: 14px;">
+        <a href="/drive" class="nav-item active">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#188038"><path d="M19 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 16H5V4h14v14z"/></svg>
+          <span>My Drive</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-storage">
+        <div class="storage-row">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#5f6368"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/></svg>
+          <span class="storage-text">Storage</span>
+        </div>
+        <div class="storage-bar"><div class="storage-fill" id="storageFill" style="width: 2%"></div></div>
+        <div class="storage-caption" id="storageText">0 files in Drive</div>
+      </div>
+    </aside>
+
+    <main class="drive-main" id="dropZone">
+      
+      <div class="main-header">
+        <div class="main-title-wrap">
+          <h1 class="main-title">My Drive</h1>
+          <span class="file-count-badge" id="fileCountBadge">0 files</span>
+        </div>
+      </div>
+
+      <div class="drag-hint-box" onclick="triggerFileUpload()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#1a73e8"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+        <span>Drag and drop files here to upload, or click to browse</span>
+      </div>
+
+      <div class="files-grid" id="filesContainer">
+      </div>
+
+    </main>
+  </div>
+
+  <div class="upload-popup" id="uploadPopup" style="display:none">
+    <div class="up-header">
+      <span class="up-title" id="upTitle">1 upload complete</span>
+      <button class="up-close" onclick="closeUploadPopup()">✕</button>
+    </div>
+    <div class="up-body" id="upBody">
+    </div>
+  </div>
+
+
+
+  <div class="preview-lightbox" id="previewLightbox" style="display:none">
+    <div class="pl-header">
+      <div class="pl-header-left">
+        <button class="icon-btn-light" onclick="closePreviewLightbox()" title="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        </button>
+        <span class="pl-filename" id="plFilename">Document.pdf</span>
+      </div>
+      <div class="pl-header-right">
+        <button class="btn-card-action" id="plAdminReviewBtn" style="background:#ffffff;color:#1a73e8;padding:6px 12px;font-size:12px">
+          <span>👥 Send for Admin Review</span>
+        </button>
+        <button class="icon-btn-light" id="plDownloadBtn" title="Download">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="pl-body">
+      <div class="pl-content-card" id="plContentCard">
+        <div class="pl-loading" id="plLoading">
+          <div class="spinner"></div>
+          <span>Loading document preview...</span>
+        </div>
+        <div class="pl-html-content" id="plHtmlContent" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="{{ url_for('static', filename='js/moogle-drive.js') }}"></script>
+</body>
+</html>

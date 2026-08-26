@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create your Moogle Account</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f0f4f9;
+      color: #1f1f1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    .signup-wrapper {
+      margin: auto 0;
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      border: 1px solid #c7c7c7;
+      border-radius: 28px;
+      padding: 40px 36px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .moogle-logo {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+    }
+    .moogle-logo .m { color: #4285F4; }
+    .moogle-logo .o1 { color: #EA4335; }
+    .moogle-logo .o2 { color: #FBBC05; }
+    .moogle-logo .g { color: #4285F4; }
+    .moogle-logo .l { color: #34A853; }
+    .moogle-logo .e { color: #EA4335; }
+
+    .drive-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8f0fe;
+      color: #1967d2;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+    .title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #1f1f1f;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 14.5px;
+      color: #444746;
+      margin-bottom: 28px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 15px;
+      border: 1px solid #747775;
+      border-radius: 4px;
+      outline: none;
+      transition: all 0.2s;
+      background: transparent;
+    }
+    .form-input:focus {
+      border-color: #0b57d0;
+      box-shadow: 0 0 0 1px #0b57d0;
+    }
+    .form-label {
+      position: absolute;
+      left: 12px;
+      top: -9px;
+      background: #ffffff;
+      padding: 0 4px;
+      font-size: 12px;
+      color: #444746;
+    }
+    .error-box {
+      background: #fce8e6;
+      border: 1px solid #ea4335;
+      color: #c5221f;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .quota-notice {
+      background: #e8f0fe;
+      border: 1px solid #c2e7ff;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      color: #1967d2;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 28px;
+    }
+    .btn-text {
+      background: none;
+      border: none;
+      color: #0b57d0;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 20px;
+      text-decoration: none;
+    }
+    .btn-text:hover {
+      background: #f0f4f9;
+    }
+    .btn-primary {
+      background: #0b57d0;
+      color: #ffffff;
+      border: none;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover {
+      background: #0842a0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .footer {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #444746;
+      padding: 12px 8px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+    .footer-links a {
+      color: #444746;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: #1f1f1f;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-wrapper">
+    <div class="logo-container">
+      <span class="moogle-logo">
+        <span class="m">M</span><span class="o1">o</span><span class="o2">o</span><span class="g">g</span><span class="l">l</span><span class="e">e</span>
+      </span>
+      <span class="drive-badge">Drive</span>
+    </div>
+
+    <h1 class="title">Create your Account</h1>
+    <p class="subtitle">to get started with Moogle Drive</p>
+
+    {% if error %}
+    <div class="error-box">{{ error }}</div>
+    {% endif %}
+
+    <div class="quota-notice">
+      <span>☁️</span>
+      <span>Each account includes <strong>10 MB storage</strong> (up to 5 files).</span>
+    </div>
+
+    <form method="POST" action="/signup">
+      <div class="form-group">
+        <label class="form-label" for="name">Full name</label>
+        <input type="text" id="name" name="name" class="form-input" placeholder="Alex Morgan" required autofocus>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email address</label>
+        <input type="email" id="email" name="email" class="form-input" placeholder="name@moogle.com" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required>
+      </div>
+
+      <div class="btn-row">
+        <a href="/login" class="btn-text">Sign in instead</a>
+        <button type="submit" class="btn-primary">Create account</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="footer">
+    <span>English (United States)</span>
+    <div class="footer-links">
+      <a href="#">Help</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+
+</body>
+</html>
